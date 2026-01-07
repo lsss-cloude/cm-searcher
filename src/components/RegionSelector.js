@@ -22,12 +22,9 @@ const RegionSelector = ({
   return (
     <div style={styles.layout.leftPanel}>
       <h1 style={styles.heading.h1}>지역 목록</h1>
-      <p style={styles.paragraph.info}>
-        전체 {sidoList.length}개 시도
-      </p>
 
       <h2 style={styles.heading.h2}>시도</h2>
-      <div style={styles.grid.sido}>
+      <div className="sido-grid" style={styles.grid.sido}>
         {sidoList.map((sido) => {
           const isSelected = selectedSido?.cd === sido.cd;
           return (
@@ -43,14 +40,14 @@ const RegionSelector = ({
       </div>
 
       {selectedSido && (
-        <div>
+        <div className="sigungu-section">
           <h3 style={styles.heading.h3}>
             {selectedSido.addr_name} 시군구
           </h3>
           <p style={styles.paragraph.small}>
             총 {sigunguList.length}개 (선택: {selectedSigungu.length}개)
           </p>
-          <div style={styles.grid.sigungu}>
+          <div className="sigungu-grid" style={styles.grid.sigungu}>
             {sigunguList.map((sigungu) => {
               const isSelected = selectedSigungu.some(s => s.cd === sigungu.cd);
               return (

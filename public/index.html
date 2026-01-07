@@ -1,30 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>CM Searcher</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="당근마켓 전국 검색 도구 - 여러 지역의 당근마켓 매물을 한 번에 검색할 수 있는 웹 도구입니다. 시도, 시군구 선택으로 간편하게 전국 중고거래 매물을 검색하세요." />
+    <meta name="keywords" content="당근마켓, 당근마켓 검색, 전국 검색, 중고거래, 지역 검색, 당근, daangn, 중고 매물, 시군구 검색" />
+    <meta name="author" content="CM Searcher" />
+    <link rel="canonical" href="https://lsss-cloude.github.io/cm-searcher" />
+
+    <!-- Open Graph Meta Tags (Facebook, KakaoTalk) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lsss-cloude.github.io/cm-searcher" />
+    <meta property="og:title" content="당근마켓 전국 검색 도구 - CM Searcher" />
+    <meta property="og:description" content="여러 지역의 당근마켓 매물을 한 번에 검색할 수 있는 웹 도구입니다." />
+    <meta property="og:site_name" content="CM Searcher" />
+    <meta property="og:locale" content="ko_KR" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="당근마켓 전국 검색 도구 - CM Searcher" />
+    <meta name="twitter:description" content="여러 지역의 당근마켓 매물을 한 번에 검색할 수 있는 웹 도구입니다." />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>당근마켓 전국 검색 도구 - CM Searcher | 여러 지역 매물 한번에 검색</title>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CM Searcher",
+      "alternateName": "당근마켓 전국 검색 도구",
+      "url": "https://lsss-cloude.github.io/cm-searcher",
+      "description": "여러 지역의 당근마켓 매물을 한 번에 검색할 수 있는 웹 도구",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "inLanguage": "ko-KR"
+    }
+    </script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WNH28ZV9NQ"></script>

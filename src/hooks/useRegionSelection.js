@@ -20,9 +20,20 @@ export function useRegionSelection(onRegionChange) {
   }, [selectedSido]);
 
   const handleSidoClick = (sido) => {
+    const willSelect = selectedSido?.cd !== sido.cd;
     setSelectedSido(selectedSido?.cd === sido.cd ? null : sido);
     setSelectedSigungu([]);
     onRegionChange?.();
+
+    // 시도 선택 시 시군구 영역으로 스크롤 (모바일에서만)
+    if (willSelect && window.innerWidth <= 768) {
+      setTimeout(() => {
+        const sigunguSection = document.querySelector('.sigungu-section');
+        if (sigunguSection) {
+          sigunguSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
   };
 
   const handleSigunguClick = (sigungu) => {

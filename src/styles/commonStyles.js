@@ -175,7 +175,7 @@ export const codeBlock = {
     backgroundColor: '#f8f9fa',
     padding: '1.5rem',
     borderRadius: '8px',
-    fontSize: '0.9rem',
+    fontSize: '0.7rem',
     lineHeight: '1.6',
     overflow: 'auto',
     border: '1px solid #dee2e6',

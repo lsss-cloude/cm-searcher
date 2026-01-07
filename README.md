@@ -1,4 +1,4 @@
-# 당근마켓 지역 검색 도구 🥕
+# 당근마켓 전국 검색 도구 🥕
 
 당근마켓에서 여러 지역의 매물을 한 번에 검색할 수 있는 웹 도구입니다.
 
@@ -276,3 +276,7 @@ cm-searcher/
 ## 📄 라이선스
 
 이 프로젝트는 MIT 라이선스 하에 배포됩니다.
+
+## 🙏 Credits
+
+- Favicon: [Carrot icons created by Whitevector - Flaticon](https://www.flaticon.com/free-icons/carrot)

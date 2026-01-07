@@ -7,6 +7,7 @@ import RegionSelector from './components/RegionSelector';
 import DaangnLink from './components/DaangnLink';
 import ResultSection from './components/ResultSection';
 import SearchSection from './components/SearchSection';
+import UsageGuide from './components/UsageGuide';
 import { useRegionSelection } from './hooks/useRegionSelection';
 import { useSearchQuery } from './hooks/useSearchQuery';
 import { useLocationResult } from './hooks/useLocationResult';
@@ -66,6 +67,9 @@ function App() {
         <div style={styles.layout.rightPanel}>
           {/* 0. 당근마켓으로 이동 */}
           <DaangnLink />
+
+          {/* 사용 방법 */}
+          <UsageGuide />
 
           {/* 1. 지역 코드 조회 스크립트 */}
           <ScriptViewer
