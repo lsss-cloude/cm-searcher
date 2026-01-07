@@ -1,6 +1,8 @@
 {
   "short_name": "CM Searcher",
-  "name": "CM Searcher",
+  "name": "당근마켓 전국 검색 도구 - CM Searcher",
+  "description": "여러 지역의 당근마켓 매물을 한 번에 검색",
+  "lang": "ko",
   "icons": [
     {
       "src": "favicon.ico",

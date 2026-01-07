@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcm_searcher=self.webpackChunkcm_searcher||[]).push([[195],{195(e){e.exports=JSON.parse('{"result":[{"addr_name":"\uc138\uc885\uc2dc","cd":"29010","full_addr":"\uc138\uc885\ud2b9\ubcc4\uc790\uce58\uc2dc \uc138\uc885\uc2dc","y_coor":"1840335","x_coor":"978417"}]}')}}]);
