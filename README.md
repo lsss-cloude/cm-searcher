@@ -1,70 +1,278 @@
-# Getting Started with Create React App
+# 당근마켓 지역 검색 도구 🥕
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+당근마켓에서 여러 지역의 매물을 한 번에 검색할 수 있는 웹 도구입니다.
 
-## Available Scripts
+## 📋 주요 기능
 
-In the project directory, you can run:
+- 전국 시도/시군구 선택 인터페이스
+- 지역 코드 자동 조회 스크립트 생성
+- 다중 지역 매물 검색 스크립트 생성
+- 거래 가능 상품만 필터링 옵션
+- 검색 결과 자동 정리 및 출력
 
-### `npm start`
+## 🚀 사용 방법
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1단계: 지역 선택
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 왼쪽 패널에서 원하는 **시도**를 클릭합니다.
+- 해당 시도의 **시군구** 목록이 표시되면 검색하고 싶은 지역들을 선택합니다.
+- 여러 지역을 동시에 선택할 수 있습니다.
 
-### `npm test`
+### 2단계: 지역 코드 조회 스크립트 복사
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **"1. 지역 코드 조회"** 섹션의 **"복사"** 버튼을 클릭하여 스크립트를 복사합니다.
 
-### `npm run build`
+### 3단계: 당근마켓에서 스크립트 실행
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. [당근마켓 웹사이트](https://www.daangn.com/kr/)를 엽니다.
+2. 개발자 도구를 실행합니다:
+   - **Windows/Linux**: `F12` 또는 `Ctrl + Shift + I`
+   - **Mac**: `Cmd + Option + I`
+3. **Console** 탭으로 이동합니다.
+4. 복사한 스크립트를 붙여넣고 `Enter`를 누릅니다.
+5. 콘솔에 지역 조회 진행 상황이 표시됩니다:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+[1/3] 요청 중: 서울특별시 강남구 역삼동
+✅ 성공: 서울특별시 강남구 역삼동 (5개 지역)
+[2/3] 요청 중: 서울특별시 강남구 대치동
+✅ 성공: 서울특별시 강남구 대치동 (3개 지역)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+========== 수집 완료 ==========
+성공: 2개
+실패: 0개
+총 수집된 지역: 8개
 
-### `npm run eject`
+========== Minified JSON ==========
+{"locations":[{"id":6035,"name":"역삼동"},{"id":6032,"name":"대치동"}]}
+✅ JSON이 클립보드에 복사되었습니다!
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 4단계: 지역 데이터 붙여넣기
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. 콘솔에 출력된 JSON 데이터를 복사합니다.
+2. **"2. 지역 코드 조회 결과"** 섹션의 입력창에 붙여넣습니다.
+3. 또는 **"붙여넣기"** 버튼을 클릭하여 자동으로 붙여넣을 수 있습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 5단계: 검색어 입력 및 옵션 설정
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **"3. 검색"** 섹션의 입력창에 찾고 싶은 상품명을 입력합니다.
+   - 예: `아이폰`, `노트북`, `자전거`, `책상` 등
+2. **"거래 가능만 보기"** 체크박스를 선택하면 판매 중인 상품만 검색합니다.
 
-## Learn More
+### 6단계: 매물 조회 스크립트 복사
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **"4. 매물 조회"** 섹션의 **"복사"** 버튼을 클릭하여 스크립트를 복사합니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 7단계: 당근마켓에서 매물 검색 실행
 
-### Code Splitting
+1. 당근마켓 개발자 도구 콘솔로 돌아갑니다.
+2. 복사한 스크립트를 붙여넣고 `Enter`를 누릅니다.
+3. 콘솔에 검색 진행 상황이 실시간으로 표시됩니다:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+지역별 검색 시작...
+[1/8] 검색 중: 역삼동
+✅ 발견: 역삼동 (게시글 12개)
+[2/8] 검색 중: 대치동
+✅ 발견: 대치동 (게시글 5개)
+[3/8] 검색 중: 논현동
+...
 
-### Analyzing the Bundle Size
+========== 검색 완료 ==========
+총 3개 지역에서 발견:
+1. 역삼동 - 12개 게시글
+2. 대치동 - 5개 게시글
+3. 청담동 - 3개 게시글
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 8단계: 검색 결과 확인
 
-### Making a Progressive Web App
+- 콘솔에 매물이 있는 지역과 게시글 수가 표시됩니다.
+- 각 지역의 검색 결과 URL도 함께 출력됩니다.
+- 해당 URL을 클릭하여 당근마켓에서 직접 확인할 수 있습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 💻 개발 환경 설정
 
-### Advanced Configuration
+### 필수 요구사항
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Node.js 14.0.0 이상
+- npm 6.0.0 이상
 
-### Deployment
+### 설치 및 실행
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+# 저장소 클론
+git clone https://github.com/your-username/cm-searcher.git
 
-### `npm run build` fails to minify
+# 프로젝트 디렉토리로 이동
+cd cm-searcher
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
+npm start
+```
+
+개발 서버가 실행되면 브라우저에서 `http://localhost:3000`으로 접속합니다.
+
+### 빌드
+
+```bash
+# 프로덕션 빌드 생성
+npm run build
+
+# 빌드 파일은 build/ 디렉토리에 생성됩니다
+```
+
+## 📁 프로젝트 구조
+
+```
+cm-searcher/
+├── public/                 # 정적 파일
+│   ├── index.html         # HTML 템플릿
+│   ├── favicon.ico        # 파비콘
+│   ├── manifest.json      # PWA 매니페스트
+│   └── robots.txt         # 크롤러 설정
+├── src/
+│   ├── components/        # React 컴포넌트
+│   │   ├── DaangnLink.js          # 당근마켓 링크
+│   │   ├── RegionSelector.js      # 지역 선택기
+│   │   ├── ResultSection.js       # 결과 입력 섹션
+│   │   ├── SearchSection.js       # 검색 입력 섹션
+│   │   └── ScriptViewer.js        # 스크립트 뷰어
+│   ├── constants/         # 상수 정의
+│   │   └── index.js               # URL, 타이머, 색상 등
+│   ├── data/              # 지역 데이터
+│   │   ├── regionData.js          # 지역 데이터 로더
+│   │   └── *.json                 # 시도별 시군구 데이터
+│   ├── hooks/             # 커스텀 훅
+│   │   ├── useDebounce.js         # 디바운스 훅
+│   │   ├── useLocationResult.js   # 지역 결과 관리
+│   │   ├── useRegionSelection.js  # 지역 선택 관리
+│   │   └── useSearchQuery.js      # 검색 쿼리 관리
+│   ├── styles/            # 스타일 정의
+│   │   └── commonStyles.js        # 공통 스타일
+│   ├── utils/             # 유틸리티 함수
+│   │   └── scriptGenerators.js   # 스크립트 생성기
+│   ├── App.js             # 메인 앱 컴포넌트
+│   ├── App.css            # 앱 스타일
+│   ├── index.js           # 진입점
+│   └── index.css          # 전역 스타일
+├── package.json           # 프로젝트 설정
+└── README.md             # 이 파일
+```
+
+## 🛠️ 기술 스택
+
+- **React 18** - UI 프레임워크
+- **React Hooks** - 상태 관리
+- **CSS-in-JS** - 스타일링
+- **Create React App** - 빌드 도구
+
+## ⚡ 주요 기능 상세
+
+### 성능 최적화
+
+- **useMemo**: 스크립트 생성 메모이제이션으로 불필요한 재생성 방지
+- **React.memo**: 컴포넌트 메모이제이션으로 불필요한 리렌더링 방지
+- **Debounce**: 검색어 입력 시 300ms 디바운스 적용
+
+### 상태 관리
+
+- 커스텀 훅을 통한 관련 상태 응집
+- 지역 선택 시 자동으로 이전 결과 초기화
+- 디바운스된 검색어로 성능 개선
+
+### 사용자 경험
+
+- 직관적인 지역 선택 인터페이스
+- 실시간 선택 피드백 (파스텔 오렌지 색상)
+- 원클릭 복사/붙여넣기 기능
+- 검색 진행 상황 실시간 표시
+
+## 📝 스크립트 설명
+
+### 지역 코드 조회 스크립트
+
+선택한 지역명을 당근마켓 API를 통해 지역 ID로 변환합니다.
+
+**동작 방식:**
+- 각 지역을 순차적으로 조회
+- 서버 부하 방지를 위해 200ms 간격으로 요청
+- 결과를 JSON 형식으로 자동 정리
+- 클립보드에 자동 복사 시도
+
+**생성되는 데이터 형식:**
+```json
+{
+  "locations": [
+    {"id": 6035, "name": "역삼동"},
+    {"id": 6032, "name": "대치동"}
+  ]
+}
+```
+
+### 매물 조회 스크립트
+
+지역 ID와 검색어로 각 지역의 매물을 검색합니다.
+
+**동작 방식:**
+- 각 지역별로 매물 존재 여부 확인
+- 서버 부하 방지를 위해 200ms 간격으로 요청
+- 매물이 있는 지역만 결과에 포함
+- 최종 결과를 보기 좋게 정리하여 출력
+
+**검색 결과 정보:**
+- 지역명
+- 게시글 개수
+
+## ⚠️ 주의사항
+
+### 개발자 도구 사용
+
+이 도구는 브라우저 개발자 도구의 콘솔을 사용합니다.
+
+- ⚠️ **경고**: 악의적인 스크립트에 주의하세요
+- ✅ **권장**: 출처가 명확한 스크립트만 실행하세요
+- ℹ️ **참고**: 이 프로젝트의 스크립트는 GitHub에서 확인 가능합니다
+
+### API 호출 제한
+
+과도한 API 호출은 서버에 부담을 줄 수 있습니다.
+
+- 스크립트에는 요청 간 대기 시간이 포함되어 있습니다
+  - 지역 조회: 200ms 간격
+  - 매물 검색: 200ms 간격
+- 필요한 지역만 선택하여 검색하세요
+
+### 데이터 정확성
+
+- 검색 결과는 실시간 데이터가 아닐 수 있습니다
+- 정확한 정보는 당근마켓 웹사이트에서 직접 확인하세요
+- 매물 상태는 시간에 따라 변경될 수 있습니다
+
+## 🔍 트러블슈팅
+
+### 스크립트 실행 오류
+
+**문제**: 콘솔에서 스크립트 실행 시 오류 발생
+
+**해결방법**:
+1. 당근마켓 웹사이트가 열려 있는지 확인
+2. 개발자 도구의 Console 탭에서 실행하는지 확인
+3. 전체 스크립트가 복사되었는지 확인
+
+### JSON 붙여넣기 오류
+
+**문제**: 지역 코드 조회 결과를 붙여넣을 수 없음
+
+**해결방법**:
+1. `{"locations":[...]}` 형식의 JSON만 붙여넣기
+2. 콘솔의 "Minified JSON" 부분만 복사
+3. 클립보드 권한 확인
+
+## 📄 라이선스
+
+이 프로젝트는 MIT 라이선스 하에 배포됩니다.

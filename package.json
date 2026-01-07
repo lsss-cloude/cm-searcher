@@ -1,5 +1,5 @@
 {
-  "name": "addr-api",
+  "name": "cm-searcher",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

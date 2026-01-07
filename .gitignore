@@ -18,6 +18,16 @@
 .env.test.local
 .env.production.local
 
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# backup files
+*.backup.*
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
