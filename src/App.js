@@ -1,5 +1,5 @@
 import './App.css';
-import { useMemo } from 'react';
+import { useMemo, useEffect, useCallback } from 'react';
 import { getSidoList } from './data/regionData';
 import * as styles from './styles/commonStyles';
 import ScriptViewer from './components/ScriptViewer';
@@ -31,6 +31,25 @@ function App() {
     handleSidoClick,
     handleSigunguClick
   } = useRegionSelection(clearLocationResult);
+
+  // 시도 선택 시 기본 locations 데이터 로드
+  const loadDefaultLocations = useCallback(async (sidoCode) => {
+    try {
+      const module = await import(`./data/${sidoCode}_data.json`);
+      const data = module.default || module;
+      if (data.locations && data.locations.length > 0) {
+        setLocationResult(JSON.stringify(data));
+      }
+    } catch (err) {
+      console.log('기본 데이터 없음:', sidoCode);
+    }
+  }, [setLocationResult]);
+
+  useEffect(() => {
+    if (selectedSido) {
+      loadDefaultLocations(selectedSido.cd);
+    }
+  }, [selectedSido, loadDefaultLocations]);
 
   const {
     searchQuery,
