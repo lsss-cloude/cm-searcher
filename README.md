@@ -5,10 +5,12 @@
 ## 📋 주요 기능
 
 - 전국 시도/시군구 선택 인터페이스
+- **시도 선택 시 기본 지역 데이터 자동 로드** (스크립트 실행 없이 바로 검색 가능)
 - 지역 코드 자동 조회 스크립트 생성
 - 다중 지역 매물 검색 스크립트 생성
-- 거래 가능 상품만 필터링 옵션
-- 검색 결과 자동 정리 및 출력
+- 거래 가능 상품만 필터링 옵션 (기본 활성화)
+- 검색 결과에 가격, 제목, 링크 상세 정보 출력
+- 접이식 사용 가이드 UI
 
 ## 🚀 사용 방법
 
@@ -57,8 +59,9 @@
 ### 5단계: 검색어 입력 및 옵션 설정
 
 1. **"3. 검색"** 섹션의 입력창에 찾고 싶은 상품명을 입력합니다.
-   - 예: `아이폰`, `노트북`, `자전거`, `책상` 등
-2. **"거래 가능만 보기"** 체크박스를 선택하면 판매 중인 상품만 검색합니다.
+   - 예: `노트북`, `자전거`, `책상` 등
+2. **"거래 가능만 보기"** 체크박스는 기본으로 체크되어 있으며, 판매 중인 상품만 검색합니다.
+   - 체크 해제 시 판매 완료된 상품도 함께 검색됩니다.
 
 ### 6단계: 매물 조회 스크립트 복사
 
@@ -73,17 +76,30 @@
 ```
 지역별 검색 시작...
 [1/8] 검색 중: 역삼동
-✅ 발견: 역삼동 (게시글 12개)
+✅ 발견: 역삼동 (게시글 2개)
+   1. 1,200,000원 | 노트북 256GB
+      https://www.daangn.com/kr/buy-sell/123456/
+   2. 950,000원 | 노트북 128GB
+      https://www.daangn.com/kr/buy-sell/123457/
 [2/8] 검색 중: 대치동
-✅ 발견: 대치동 (게시글 5개)
-[3/8] 검색 중: 논현동
+✅ 발견: 대치동 (게시글 1개)
+   1. 1,100,000원 | 노트북 미개봉
+      https://www.daangn.com/kr/buy-sell/123458/
 ...
 
 ========== 검색 완료 ==========
-총 3개 지역에서 발견:
-1. 역삼동 - 12개 게시글
-2. 대치동 - 5개 게시글
-3. 청담동 - 3개 게시글
+
+총 2개 지역에서 3개 게시글 발견:
+
+📍 역삼동 (2개)
+   1. 1,200,000원 | 노트북 256GB
+      https://www.daangn.com/kr/buy-sell/123456/
+   2. 950,000원 | 노트북 128GB
+      https://www.daangn.com/kr/buy-sell/123457/
+
+📍 대치동 (1개)
+   1. 1,100,000원 | 노트북 미개봉
+      https://www.daangn.com/kr/buy-sell/123458/
 ```
 
 ### 8단계: 검색 결과 확인
@@ -131,22 +147,26 @@ npm run build
 ```
 cm-searcher/
 ├── public/                 # 정적 파일
-│   ├── index.html         # HTML 템플릿
+│   ├── index.html         # HTML 템플릿 (SEO 메타 태그 포함)
 │   ├── favicon.ico        # 파비콘
 │   ├── manifest.json      # PWA 매니페스트
-│   └── robots.txt         # 크롤러 설정
+│   ├── robots.txt         # 크롤러 설정
+│   └── sitemap.xml        # 사이트맵
 ├── src/
 │   ├── components/        # React 컴포넌트
-│   │   ├── DaangnLink.js          # 당근마켓 링크
-│   │   ├── RegionSelector.js      # 지역 선택기
-│   │   ├── ResultSection.js       # 결과 입력 섹션
-│   │   ├── SearchSection.js       # 검색 입력 섹션
-│   │   └── ScriptViewer.js        # 스크립트 뷰어
+│   │   ├── DaangnLink.js          # 당근마켓 링크 버튼
+│   │   ├── RegionSelector.js      # 시도/시군구 선택기
+│   │   ├── ResultSection.js       # 지역 코드 조회 결과 입력
+│   │   ├── SearchSection.js       # 검색어 입력 및 옵션
+│   │   ├── ScriptViewer.js        # 스크립트 표시/복사
+│   │   └── UsageGuide.js          # 접이식 사용 가이드
 │   ├── constants/         # 상수 정의
 │   │   └── index.js               # URL, 타이머, 색상 등
 │   ├── data/              # 지역 데이터
 │   │   ├── regionData.js          # 지역 데이터 로더
-│   │   └── *.json                 # 시도별 시군구 데이터
+│   │   ├── regions.json           # 전국 시도 목록
+│   │   ├── {시도코드}.json        # 시도별 시군구 데이터
+│   │   └── {시도코드}_data.json   # 시도별 기본 지역 데이터
 │   ├── hooks/             # 커스텀 훅
 │   │   ├── useDebounce.js         # 디바운스 훅
 │   │   ├── useLocationResult.js   # 지역 결과 관리
@@ -155,21 +175,23 @@ cm-searcher/
 │   ├── styles/            # 스타일 정의
 │   │   └── commonStyles.js        # 공통 스타일
 │   ├── utils/             # 유틸리티 함수
-│   │   └── scriptGenerators.js   # 스크립트 생성기
+│   │   └── scriptGenerators.js    # 스크립트 생성기
 │   ├── App.js             # 메인 앱 컴포넌트
 │   ├── App.css            # 앱 스타일
 │   ├── index.js           # 진입점
 │   └── index.css          # 전역 스타일
 ├── package.json           # 프로젝트 설정
-└── README.md             # 이 파일
+└── README.md              # 이 파일
 ```
 
 ## 🛠️ 기술 스택
 
 - **React 18** - UI 프레임워크
-- **React Hooks** - 상태 관리
+- **React Hooks** - 상태 관리 (useState, useMemo, useEffect, useCallback)
 - **CSS-in-JS** - 스타일링
 - **Create React App** - 빌드 도구
+- **GitHub Pages** - 호스팅 (gh-pages)
+- **Google Analytics** - 사용 통계
 
 ## ⚡ 주요 기능 상세
 
@@ -184,6 +206,12 @@ cm-searcher/
 - 커스텀 훅을 통한 관련 상태 응집
 - 지역 선택 시 자동으로 이전 결과 초기화
 - 디바운스된 검색어로 성능 개선
+
+### 시도 기본 데이터 자동 로드
+
+- 시도 선택 시 해당 시도의 기본 지역 데이터(`*_data.json`)를 자동으로 로드
+- 스크립트 실행 없이 바로 매물 검색 가능
+- Dynamic import를 통한 효율적인 데이터 로딩
 
 ### 사용자 경험
 
@@ -225,8 +253,10 @@ cm-searcher/
 - 최종 결과를 보기 좋게 정리하여 출력
 
 **검색 결과 정보:**
-- 지역명
-- 게시글 개수
+- 지역명 및 게시글 개수
+- 각 게시글의 가격
+- 각 게시글의 제목
+- 각 게시글의 당근마켓 링크
 
 ## ⚠️ 주의사항
 
