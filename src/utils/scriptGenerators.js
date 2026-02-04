@@ -88,18 +88,22 @@ async function fetchAllLocations() {
 fetchAllLocations();`;
 }
 
-export function generatePropertyScript({ parsedLocations, debouncedQuery }) {
+export function generatePropertyScript({ parsedLocations, debouncedQuery, onlyOnSale }) {
   const locationsArray = parsedLocations.length > 0
     ? JSON.stringify(parsedLocations)
     : '[{"id":6035,"name":"역삼동"},{"id":6032,"name":"대치동"}]';
 
   const searchQueryValue = debouncedQuery || "";
+  const onlyOnSaleValue = onlyOnSale ? 'true' : 'false';
 
   return `// 조회 지역 목록
 const locations = ${locationsArray};
 
 // 검색어
 const searchQuery = "${searchQueryValue}";
+
+// 거래 가능만 보기
+const onlyOnSale = ${onlyOnSaleValue};
 
 // 지연 함수 (요청 간 간격을 두기 위해)
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -118,6 +122,10 @@ async function searchLocations() {
       search: searchQuery,
       _data: 'routes/kr.buy-sell._index'
     });
+    
+    if (onlyOnSale) {
+      params.append('only_on_sale', 'true');
+    }
 
     const url = \`/kr/buy-sell/?\${params.toString()}\`;
 
@@ -131,10 +139,27 @@ async function searchLocations() {
       // fleamarketArticles의 length가 1 이상인지 확인
       if (data.allPage && data.allPage.fleamarketArticles && data.allPage.fleamarketArticles.length > 0) {
         const locationInfo = \`\${location.name}\`;
-        console.log(\`✅ 발견: \${locationInfo} (게시글 \${data.allPage.fleamarketArticles.length}개)\`);
+        const formatPrice = (price) => {
+          if (!price) return '';
+          const num = typeof price === 'string' ? parseFloat(price) : price;
+          return Math.floor(num).toLocaleString();
+        };
+        const articles = data.allPage.fleamarketArticles.map(article => ({
+          title: article.title || '',
+          price: formatPrice(article.price),
+          href: article.href
+        }));
+
+        console.log(\`✅ 발견: \${locationInfo} (게시글 \${articles.length}개)\`);
+        articles.forEach((article, idx) => {
+          console.log(\`   \${idx + 1}. \${article.price}원 | \${article.title}\`);
+          console.log(\`      \${article.href}\`);
+        });
+
         foundLocations.push({
           location: locationInfo,
-          count: data.allPage.fleamarketArticles.length,
+          count: articles.length,
+          articles: articles,
           url: url
         });
       }
@@ -150,9 +175,15 @@ async function searchLocations() {
   // 최종 결과 출력
   console.log("\\n========== 검색 완료 ==========");
   if (foundLocations.length > 0) {
-    console.log(\`\\n총 \${foundLocations.length}개 지역에서 발견:\`);
+    const totalArticles = foundLocations.reduce((sum, item) => sum + item.count, 0);
+    console.log(\`\\n총 \${foundLocations.length}개 지역에서 \${totalArticles}개 게시글 발견:\\n\`);
     foundLocations.forEach((item, idx) => {
-      console.log(\`\${idx + 1}. \${item.location} - \${item.count}개 게시글\`);
+      console.log(\`📍 \${item.location} (\${item.count}개)\`);
+      item.articles.forEach((article, aIdx) => {
+        console.log(\`   \${aIdx + 1}. \${article.price}원 | \${article.title}\`);
+        console.log(\`      \${article.href}\`);
+      });
+      console.log('');
     });
   } else {
     console.log("검색 결과가 있는 지역이 없습니다.");

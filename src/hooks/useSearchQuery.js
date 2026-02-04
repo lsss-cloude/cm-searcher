@@ -4,7 +4,7 @@ import { TIMERS } from '../constants';
 
 export function useSearchQuery() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [onlyOnSale, setOnlyOnSale] = useState(false);
+  const [onlyOnSale, setOnlyOnSale] = useState(true);
   const debouncedQuery = useDebounce(searchQuery, TIMERS.DEBOUNCE_DELAY);
 
   return {

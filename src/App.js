@@ -65,8 +65,8 @@ function App() {
   );
 
   const propertyScript = useMemo(
-    () => generatePropertyScript({ parsedLocations, debouncedQuery }),
-    [parsedLocations, debouncedQuery]
+    () => generatePropertyScript({ parsedLocations, debouncedQuery, onlyOnSale }),
+    [parsedLocations, debouncedQuery, onlyOnSale]
   );
 
   return (
